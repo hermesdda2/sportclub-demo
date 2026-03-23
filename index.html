@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sport Club Paseo Tehuacán</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,700;0,800;0,900;1,300;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#inicio" class="nav-logo">
+        <img src="Imágenes/Logo Sport Club.png" alt="Sport Club Paseo" />
+        <span>Sport Club <strong>Paseo</strong></span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#nosotros">Club</a></li>
+        <li><a href="#instalaciones">Instalaciones</a></li>
+        <li><a href="#membresias">Membresías</a></li>
+        <li><a href="#horarios">Horarios</a></li>
+      </ul>
+      <a href="#contacto" class="btn-nav-contact">
+        Contáctanos <span class="btn-arrow">↗</span>
+      </a>
+      <button class="nav-burger" id="burger"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="#nosotros">Club</a></li>
+      <li><a href="#instalaciones">Instalaciones</a></li>
+      <li><a href="#membresias">Membresías</a></li>
+      <li><a href="#horarios">Horarios</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero" id="inicio">
+    <!-- SLIDER DE FONDO -->
+    <div class="hero-slider" id="heroSlider">
+      <!-- GYM / pesas -->
+      <div class="hero-slide active" style="background-image:url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1600&q=85&auto=format&fit=crop')"></div>
+      <!-- Cancha de tenis -->
+      <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?w=1600&q=85&auto=format&fit=crop')"></div>
+      <!-- Alberca / natación -->
+      <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1575429198097-0414ec08e8cd?w=1600&q=85&auto=format&fit=crop')"></div>
+      <!-- Yoga / meditación -->
+      <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=1600&q=85&auto=format&fit=crop')"></div>
+    </div>
+    <canvas id="particleCanvas"></canvas>
+    <div class="hero-overlay"></div>
+    <!-- Dots del slider -->
+    <div class="slider-dots" id="sliderDots">
+      <button class="sdot active" data-idx="0"></button>
+      <button class="sdot" data-idx="1"></button>
+      <button class="sdot" data-idx="2"></button>
+      <button class="sdot" data-idx="3"></button>
+    </div>
+
+    <!-- Texto principal -->
+    <div class="hero-content">
+      <div class="hero-left reveal">
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          Bienvenido a Sport Club Paseo
+        </div>
+        <h1>
+          <em>Activa y</em> <strong>transforma</strong><br />
+          <strong>tu vida</strong><br />
+          <em>en Tehuacán</em>
+        </h1>
+        <p class="hero-sub">
+          El club deportivo más completo de Tehuacán. Alberca, gym, vapor, tenis y mucho más. Tu bienestar es nuestra misión.
+        </p>
+        <div class="hero-ctas">
+          <a href="#membresias" class="btn-pill-primary">
+            Membresías <span class="btn-arrow">↗</span>
+          </a>
+          <a href="#instalaciones" class="btn-pill-ghost">
+            Instalaciones <span class="btn-arrow">↗</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Card flotante -->
+      <div class="hero-card reveal">
+        <div class="hcard-location">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          Calle 36 Norte No. 601<br />
+          <span>Col. Ex Hacienda San Lorenzo, Tehuacán</span>
+        </div>
+        <div class="hcard-divider"></div>
+        <p class="hcard-label">Horario general</p>
+        <div class="hcard-schedule">
+          <div class="hsch-row">
+            <span>Mar – Sáb</span>
+            <div class="hsch-bar">
+              <div class="hsch-fill" style="width:80%"></div>
+            </div>
+            <strong>6:00 – 22:00</strong>
+          </div>
+          <div class="hsch-row">
+            <span>Domingo</span>
+            <div class="hsch-bar">
+              <div class="hsch-fill" style="width:50%"></div>
+            </div>
+            <strong>8:00 – 18:00</strong>
+          </div>
+        </div>
+        <a href="https://wa.me/5212381870661" target="_blank" class="hcard-cta">
+          Agendar visita ↗
+        </a>
+      </div>
+    </div>
+
+    <!-- Stats bar -->
+    <div class="hero-stats">
+      <div class="hstat">
+        <div class="hstat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12c.5 0 1.5-1 2-1s1.5 1 2 1 1.5-1 2-1 1.5 1 2 1 1.5-1 2-1 1.5 1 2 1 1.5-1 2-1 1.5 1 2 1"/><path d="M2 16c.5 0 1.5-1 2-1s1.5 1 2 1 1.5-1 2-1 1.5 1 2 1 1.5-1 2-1 1.5 1 2 1 1.5-1 2-1 1.5 1 2 1"/><circle cx="17" cy="5" r="2"/><path d="M17 7v3l-3 2"/></svg>
+        </div>
+        <strong>6+</strong>
+        <span>Instalaciones</span>
+      </div>
+      <div class="hstat-sep"></div>
+      <div class="hstat">
+        <div class="hstat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+        </div>
+        <strong>6</strong>
+        <span>Planes de membresía</span>
+      </div>
+      <div class="hstat-sep"></div>
+      <div class="hstat">
+        <div class="hstat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <strong>15+</strong>
+        <span>Años de experiencia</span>
+      </div>
+      <div class="hstat-sep"></div>
+      <div class="hstat">
+        <div class="hstat-icon">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </div>
+        <strong>238 187 0661</strong>
+        <span>WhatsApp</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- NOSOTROS -->
+  <section class="sec" id="nosotros">
+    <div class="container">
+      <div class="sec-two-col">
+        <div class="reveal">
+          <p class="tag">Quiénes somos</p>
+          <h2><em>Sobre</em> <strong>el Club</strong></h2>
+          <p class="sec-lead">Un espacio diseñado para activar y transformar vidas, promoviendo la salud y el bienestar individual en Tehuacán.</p>
+          <p class="sec-body">Sport Club Paseo es el club deportivo más completo de la región. Contamos con instalaciones de primer nivel: alberca semiolímpica, gimnasio equipado, sauna de vapor, canchas de tenis y más. Somos una comunidad que se apoya mutuamente para alcanzar metas y superar límites cada día.</p>
+          <div class="sec-btns">
+            <a href="#membresias" class="btn-pill-primary">Ver membresías <span class="btn-arrow">↗</span></a>
+            <a href="#instalaciones" class="btn-pill-outline">Instalaciones <span class="btn-arrow">↗</span></a>
+          </div>
+        </div>
+        <div class="values-grid reveal">
+          <div class="value-card">
+            <div class="vc-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+            </div>
+            <h4>Salud integral</h4>
+            <p>Bienestar físico y mental con instalaciones de primer nivel.</p>
+          </div>
+          <div class="value-card">
+            <div class="vc-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            </div>
+            <h4>Comunidad activa</h4>
+            <p>Una familia deportiva que se apoya para superar límites.</p>
+          </div>
+          <div class="value-card">
+            <div class="vc-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            </div>
+            <h4>Transformación</h4>
+            <p>Resultados tangibles en cuerpo y mente, todos los días.</p>
+          </div>
+          <div class="value-card">
+            <div class="vc-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+            </div>
+            <h4>Excelencia</h4>
+            <p>15+ años de experiencia brindando el mejor servicio.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSTALACIONES -->
+  <section class="sec sec-alt" id="instalaciones">
+    <div class="container">
+      <div class="sec-header reveal">
+        <p class="tag">Nuestras instalaciones</p>
+        <h2><em>Todo lo que necesitas</em> <strong>en un solo lugar</strong></h2>
+      </div>
+      <div class="inst-grid">
+        <div class="inst-card reveal">
+          <div class="inst-num">01</div>
+          <div class="inst-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 6.5h11M6.5 6.5a2 2 0 10-4 0v11a2 2 0 004 0V6.5zm11 0a2 2 0 104 0v11a2 2 0 01-4 0V6.5zM9 12h6"/></svg></div>
+          <h3>Gimnasio</h3>
+          <p>Equipos de última generación para cardio, pesas libres y máquinas de fuerza.</p>
+          <div class="inst-time">Mar–Sáb 6:00–22:00 · Dom 8:00–18:00</div>
+        </div>
+        <div class="inst-card reveal">
+          <div class="inst-num">02</div>
+          <div class="inst-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12c.5 0 1.5-1 2-1s1.5 1 2 1 1.5-1 2-1 1.5 1 2 1 1.5-1 2-1 1.5 1 2 1 1.5-1 2-1 1.5 1 2 1"/><path d="M2 16c.5 0 1.5-1 2-1s1.5 1 2 1 1.5-1 2-1 1.5 1 2 1 1.5-1 2-1 1.5 1 2 1 1.5-1 2-1 1.5 1 2 1"/><circle cx="17" cy="5" r="2"/><path d="M17 7v3l-3 2"/></svg></div>
+          <h3>Alberca</h3>
+          <p>Alberca semiolímpica para natación libre y clases. Gorra y goggles obligatorios.</p>
+          <div class="inst-time">Mar–Sáb 6:00–21:30 · Dom 8:00–17:30</div>
+        </div>
+        <div class="inst-card reveal">
+          <div class="inst-num">03</div>
+          <div class="inst-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3c0 2.5-2 2.5-2 5s2 2.5 2 5-2 2.5-2 5"/><path d="M12 3c0 2.5-2 2.5-2 5s2 2.5 2 5-2 2.5-2 5"/><path d="M16 3c0 2.5-2 2.5-2 5s2 2.5 2 5-2 2.5-2 5"/></svg></div>
+          <h3>Vapor</h3>
+          <p>Sauna de vapor para recuperación muscular y relajación profunda.</p>
+          <div class="inst-time">Mar–Sáb 7:00–11:00 · 18:00–21:00</div>
+        </div>
+        <div class="inst-card reveal">
+          <div class="inst-num">04</div>
+          <div class="inst-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3.6 9h16.8M3.6 15h16.8"/><path d="M12 3a9.003 9.003 0 010 18M12 3a9.003 9.003 0 000 18"/></svg></div>
+          <h3>Canchas</h3>
+          <p>Canchas de tenis y otros deportes. Ideal para jugar en familia.</p>
+          <div class="inst-time">Consulta disponibilidad</div>
+        </div>
+        <div class="inst-card reveal">
+          <div class="inst-num">05</div>
+          <div class="inst-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16a1 1 0 011 1v1a8 8 0 01-16 0v-1a1 1 0 011-1z"/><path d="M9 12V7a3 3 0 016 0v5"/><path d="M9 17v3m3-3v3m3-3v3"/></svg></div>
+          <h3>Regaderas</h3>
+          <p>Regaderas cómodas y limpias para terminar tu entrenamiento fresco.</p>
+          <div class="inst-time">Mar–Sáb 6:00–21:30 · Dom 8:00–17:30</div>
+        </div>
+        <div class="inst-card inst-cta reveal">
+          <h3>¿Listo para empezar?</h3>
+          <p>Ven a conocer nuestras instalaciones. Te esperamos en Tehuacán.</p>
+          <a href="https://wa.me/5212381870661" target="_blank" class="btn-pill-primary">Agendar visita ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MEMBRESÍAS -->
+  <section class="sec" id="membresias">
+    <div class="container">
+      <div class="sec-header reveal">
+        <p class="tag">Planes y precios</p>
+        <h2><em>La membresía perfecta</em> <strong>para ti y tu familia</strong></h2>
+        <p class="sec-sub">Todos los planes incluyen acceso completo a instalaciones. Membresía e inscripción son pagos únicos.</p>
+      </div>
+
+      <!-- PLANS SLIDER -->
+      <div class="plans-slider-wrap reveal">
+        <button class="pslider-btn pslider-prev" id="planPrev" aria-label="Anterior">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <div class="plans-slider" id="plansSlider">
+          <div class="plans-track" id="plansTrack">
+
+            <div class="plan-card">
+              <div class="plan-top">
+                <span class="plan-emoji">👤</span>
+                <div>
+                  <h3>Individual</h3>
+                  <p>1 integrante</p>
+                </div>
+              </div>
+              <div class="plan-price">$3,850</div>
+              <p class="plan-note">total primer mes</p>
+              <ul class="plan-list">
+                <li><span>Membresía</span><b>$2,000</b></li>
+                <li><span>Inscripción</span><b>$1,000</b></li>
+                <li class="plan-monthly"><span>Mensualidad</span><b>$850/mes</b></li>
+              </ul>
+              <a href="https://wa.me/5212381870661?text=Me%20interesa%20la%20membresia%20Individual" target="_blank" class="btn-pill-outline btn-block">Me interesa ↗</a>
+            </div>
+
+            <div class="plan-card plan-featured">
+              <div class="plan-badge-pill">Más popular</div>
+              <div class="plan-top">
+                <span class="plan-emoji">👫</span>
+                <div>
+                  <h3>Parejas</h3>
+                  <p>2 integrantes</p>
+                </div>
+              </div>
+              <div class="plan-price">$7,150</div>
+              <p class="plan-note">total primer mes</p>
+              <ul class="plan-list">
+                <li><span>Membresía</span><b>$3,600</b></li>
+                <li><span>Inscripción</span><b>$2,000</b></li>
+                <li class="plan-monthly"><span>Mensualidad</span><b>$1,550/mes</b></li>
+              </ul>
+              <a href="https://wa.me/5212381870661?text=Me%20interesa%20la%20membresia%20Parejas" target="_blank" class="btn-pill-primary btn-block">Me interesa ↗</a>
+            </div>
+
+            <div class="plan-card">
+              <div class="plan-top">
+                <span class="plan-emoji">👨‍👩‍👦</span>
+                <div>
+                  <h3>Familiar 3</h3>
+                  <p>3 integrantes</p>
+                </div>
+              </div>
+              <div class="plan-price">$9,700</div>
+              <p class="plan-note">total primer mes</p>
+              <ul class="plan-list">
+                <li><span>Membresía</span><b>$5,000</b></li>
+                <li><span>Inscripción</span><b>$2,500</b></li>
+                <li class="plan-monthly"><span>Mensualidad</span><b>$2,200/mes</b></li>
+              </ul>
+              <a href="https://wa.me/5212381870661?text=Me%20interesa%20la%20membresia%20Familiar%203" target="_blank" class="btn-pill-outline btn-block">Me interesa ↗</a>
+            </div>
+
+            <div class="plan-card">
+              <div class="plan-top">
+                <span class="plan-emoji">👨‍👩‍👧‍👦</span>
+                <div>
+                  <h3>Familiar 4</h3>
+                  <p>4 integrantes</p>
+                </div>
+              </div>
+              <div class="plan-price">$12,600</div>
+              <p class="plan-note">total primer mes</p>
+              <ul class="plan-list">
+                <li><span>Membresía</span><b>$6,700</b></li>
+                <li><span>Inscripción</span><b>$3,000</b></li>
+                <li class="plan-monthly"><span>Mensualidad</span><b>$2,900/mes</b></li>
+              </ul>
+              <a href="https://wa.me/5212381870661?text=Me%20interesa%20la%20membresia%20Familiar%204" target="_blank" class="btn-pill-outline btn-block">Me interesa ↗</a>
+            </div>
+
+            <div class="plan-card">
+              <div class="plan-top">
+                <span class="plan-emoji">👨‍👩‍👧‍👦</span>
+                <div>
+                  <h3>Familiar 5</h3>
+                  <p>5 integrantes</p>
+                </div>
+              </div>
+              <div class="plan-price">$14,375</div>
+              <p class="plan-note">total primer mes</p>
+              <ul class="plan-list">
+                <li><span>Membresía</span><b>$7,500</b></li>
+                <li><span>Inscripción</span><b>$3,500</b></li>
+                <li class="plan-monthly"><span>Mensualidad</span><b>$3,375/mes</b></li>
+              </ul>
+              <a href="https://wa.me/5212381870661?text=Me%20interesa%20la%20membresia%20Familiar%205" target="_blank" class="btn-pill-outline btn-block">Me interesa ↗</a>
+            </div>
+
+            <div class="plan-card">
+              <div class="plan-top">
+                <span class="plan-emoji">🧒</span>
+                <div>
+                  <h3>Kids</h3>
+                  <p>3 – 7 años</p>
+                </div>
+              </div>
+              <div class="plan-price">$2,600</div>
+              <p class="plan-note">total primer mes</p>
+              <ul class="plan-list">
+                <li><span>Membresía</span><b>$1,000</b></li>
+                <li><span>Inscripción</span><b>$1,000</b></li>
+                <li class="plan-monthly"><span>Mensualidad</span><b>$600/mes</b></li>
+              </ul>
+              <a href="https://wa.me/5212381870661?text=Me%20interesa%20la%20membresia%20Kids" target="_blank" class="btn-pill-outline btn-block">Me interesa ↗</a>
+            </div>
+
+          </div><!-- /plans-track -->
+        </div><!-- /plans-slider -->
+        <button class="pslider-btn pslider-next" id="planNext" aria-label="Siguiente">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div><!-- /plans-slider-wrap -->
+
+      <!-- Dots -->
+      <div class="pslider-dots" id="planDots"></div>
+
+      <div class="req-bar reveal">
+        <p class="tag">Requisitos para inscripción</p>
+        <div class="req-items">
+          <span>📋 INE</span>
+          <span>🏠 Comprobante de domicilio</span>
+          <span>📄 Acta de nacimiento</span>
+          <span>📷 Fotografía infantil</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERÍA -->
+  <section class="gallery-section" id="galeria">
+    <div class="gallery-header reveal">
+      <p class="tag tag-light">Nuestro ambiente</p>
+      <h2 class="text-white"><em>Vive la</em> <strong>experiencia Sport Club</strong></h2>
+    </div>
+
+    <div class="gallery-slider" id="gallerySlider">
+      <div class="gallery-track" id="galleryTrack">
+
+        <!-- GYM con pesas y máquinas -->
+        <div class="gslide" style="background-image:url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1400&q=85&auto=format&fit=crop')">
+          <div class="gslide-overlay"></div>
+          <div class="gslide-content">
+            <span class="gslide-tag">Gym</span>
+            <h3>Equipos de<br/><strong>última generación</strong></h3>
+            <p>Tecnología de punta para que alcances tus metas más rápido.</p>
+          </div>
+        </div>
+
+        <!-- Alberca / natación -->
+        <div class="gslide" style="background-image:url('https://images.unsplash.com/photo-1575429198097-0414ec08e8cd?w=1400&q=85&auto=format&fit=crop')">
+          <div class="gslide-overlay"></div>
+          <div class="gslide-content">
+            <span class="gslide-tag">Natación</span>
+            <h3>Alberca<br/><strong>semiolímpica</strong></h3>
+            <p>Agua cristalina y espacio para todos los niveles de nadador.</p>
+          </div>
+        </div>
+
+        <!-- Cancha de tenis -->
+        <div class="gslide" style="background-image:url('https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?w=1400&q=85&auto=format&fit=crop')">
+          <div class="gslide-overlay"></div>
+          <div class="gslide-content">
+            <span class="gslide-tag">Tenis</span>
+            <h3>Canchas<br/><strong>profesionales</strong></h3>
+            <p>Juega con familia y amigos en nuestras instalaciones de tenis.</p>
+          </div>
+        </div>
+
+        <!-- Yoga / meditación en sala -->
+        <div class="gslide" style="background-image:url('https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=1400&q=85&auto=format&fit=crop')">
+          <div class="gslide-overlay"></div>
+          <div class="gslide-content">
+            <span class="gslide-tag">Yoga</span>
+            <h3>Mente y cuerpo<br/><strong>en equilibrio</strong></h3>
+            <p>Clases guiadas para conectar con tu bienestar interior.</p>
+          </div>
+        </div>
+
+        <!-- Spinning / cardio en sala -->
+        <div class="gslide" style="background-image:url('https://images.unsplash.com/photo-1570829460005-c840387bb1ca?w=1400&q=85&auto=format&fit=crop')">
+          <div class="gslide-overlay"></div>
+          <div class="gslide-content">
+            <span class="gslide-tag">Spinning</span>
+            <h3>Energía al<br/><strong>máximo nivel</strong></h3>
+            <p>Sesiones de spinning de alto rendimiento con instructores certificados.</p>
+          </div>
+        </div>
+
+      </div><!-- /gallery-track -->
+
+      <!-- Controles -->
+      <button class="gslider-btn gslider-prev" id="galleryPrev" aria-label="Anterior">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button class="gslider-btn gslider-next" id="galleryNext" aria-label="Siguiente">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+
+      <!-- Progress bar -->
+      <div class="gallery-progress">
+        <div class="gallery-progress-bar" id="galleryProgress"></div>
+      </div>
+
+      <!-- Counter -->
+      <div class="gallery-counter" id="galleryCounter">01 / 05</div>
+    </div>
+  </section>
+
+  <!-- HORARIOS -->
+  <section class="sec sec-dark" id="horarios">
+    <div class="container">
+      <div class="sec-header reveal">
+        <p class="tag tag-light">Horarios</p>
+        <h2 class="text-white"><em>Estamos aquí</em> <strong>cuando nos necesitas</strong></h2>
+      </div>
+                  <!-- Slider wrapper -->
+      <div class="hc-slider-wrap">
+        <button class="hc-btn hc-btn-prev" id="hcPrev" aria-label="Anterior">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+
+        <div class="hc-viewport" id="hcViewport">
+          <div class="hc-track" id="hcTrack">
+
+            <!-- Gimnasio -->
+            <div class="hc" data-tilt>
+              <div class="hc-bg" style="background-image:url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80&auto=format&fit=crop')"></div>
+              <div class="hc-overlay"></div>
+              <div class="hc-spotlight"></div>
+              <div class="hc-body">
+                <span class="hc-tag">Gimnasio</span>
+                <h3 class="hc-title">Entrena sin<br/><strong>límites</strong></h3>
+                <div class="hc-schedule">
+                  <div class="hc-row"><span>Mar – Sáb</span><b>6:00 – 22:00</b></div>
+                  <div class="hc-row"><span>Domingo</span><b>8:00 – 18:00</b></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Alberca -->
+            <div class="hc" data-tilt>
+              <div class="hc-bg" style="background-image:url('https://images.unsplash.com/photo-1575429198097-0414ec08e8cd?w=800&q=80&auto=format&fit=crop')"></div>
+              <div class="hc-overlay"></div>
+              <div class="hc-spotlight"></div>
+              <div class="hc-body">
+                <span class="hc-tag">Alberca</span>
+                <h3 class="hc-title">Nada en<br/><strong>libertad</strong></h3>
+                <div class="hc-schedule">
+                  <div class="hc-row"><span>Mar – Sáb</span><b>6:00 – 21:30</b></div>
+                  <div class="hc-row"><span>Domingo</span><b>8:00 – 17:30</b></div>
+                </div>
+                <p class="hc-note">Gorra y goggles obligatorios</p>
+              </div>
+            </div>
+
+            <!-- Tenis -->
+            <div class="hc" data-tilt>
+              <div class="hc-bg" style="background-image:url('https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?w=800&q=80&auto=format&fit=crop')"></div>
+              <div class="hc-overlay"></div>
+              <div class="hc-spotlight"></div>
+              <div class="hc-body">
+                <span class="hc-tag">Tenis</span>
+                <h3 class="hc-title">Canchas<br/><strong>profesionales</strong></h3>
+                <div class="hc-schedule">
+                  <div class="hc-row"><span>Mar – Sáb</span><b>6:00 – 21:30</b></div>
+                  <div class="hc-row"><span>Domingo</span><b>8:00 – 17:30</b></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Yoga -->
+            <div class="hc" data-tilt>
+              <div class="hc-bg" style="background-image:url('https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&q=80&auto=format&fit=crop')"></div>
+              <div class="hc-overlay"></div>
+              <div class="hc-spotlight"></div>
+              <div class="hc-body">
+                <span class="hc-tag">Yoga &amp; Meditación</span>
+                <h3 class="hc-title">Mente y cuerpo<br/><strong>en equilibrio</strong></h3>
+                <div class="hc-schedule">
+                  <div class="hc-row"><span>Mar – Sáb</span><b>7:00 – 20:00</b></div>
+                  <div class="hc-row"><span>Domingo</span><b>9:00 – 14:00</b></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Spinning -->
+            <div class="hc" data-tilt>
+              <div class="hc-bg" style="background-image:url('https://images.unsplash.com/photo-1570829460005-c840387bb1ca?w=800&q=80&auto=format&fit=crop')"></div>
+              <div class="hc-overlay"></div>
+              <div class="hc-spotlight"></div>
+              <div class="hc-body">
+                <span class="hc-tag">Spinning</span>
+                <h3 class="hc-title">Energía al<br/><strong>máximo</strong></h3>
+                <div class="hc-schedule">
+                  <div class="hc-row"><span>Mar – Sáb</span><b>7:00 – 21:00</b></div>
+                  <div class="hc-row"><span>Domingo</span><b>8:00 – 14:00</b></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Atención a Socios -->
+            <div class="hc" data-tilt>
+              <div class="hc-bg" style="background-image:url('https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?w=800&q=80&auto=format&fit=crop')"></div>
+              <div class="hc-overlay"></div>
+              <div class="hc-spotlight"></div>
+              <div class="hc-body">
+                <span class="hc-tag">Atención a Socios</span>
+                <h3 class="hc-title">Siempre<br/><strong>a tu servicio</strong></h3>
+                <div class="hc-schedule">
+                  <div class="hc-row"><span>Mar – Vie</span><b>8:00–14:00 · 16:00–19:00</b></div>
+                  <div class="hc-row"><span>Sáb – Dom</span><b>9:00 – 14:00</b></div>
+                </div>
+              </div>
+            </div>
+
+          </div><!-- /hc-track -->
+        </div><!-- /hc-viewport -->
+
+        <button class="hc-btn hc-btn-next" id="hcNext" aria-label="Siguiente">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div><!-- /hc-slider-wrap -->
+          </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section class="sec" id="contacto">
+    <div class="container">
+      <div class="sec-header reveal">
+        <p class="tag">Contacto</p>
+        <h2><em>Estamos listos</em> <strong>para recibirte</strong></h2>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-cards reveal">
+          <a href="https://maps.google.com" target="_blank" class="ccard">
+            <div class="ccard-icon">📍</div>
+            <div>
+              <strong>Dirección</strong>
+              <p>Calle 36 Norte No. 601<br />Col. Ex Hacienda San Lorenzo<br />Tehuacán, Puebla</p>
+            </div>
+          </a>
+          <a href="tel:2383802328" class="ccard">
+            <div class="ccard-icon">📞</div>
+            <div>
+              <strong>Teléfonos</strong>
+              <p>238 380 2328<br />238 382 5307</p>
+            </div>
+          </a>
+          <a href="https://wa.me/5212381870661" target="_blank" class="ccard ccard-accent">
+            <div class="ccard-icon">💬</div>
+            <div>
+              <strong>WhatsApp</strong>
+              <p>238 187 0661<br /><em>Escríbenos ahora</em></p>
+            </div>
+          </a>
+          <div class="ccard-social">
+            <a href="https://www.facebook.com/SportClubPaseoTehuacan" target="_blank">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              Facebook
+            </a>
+            <a href="https://www.instagram.com/sport_club_el_paseo" target="_blank">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+              Instagram
+            </a>
+          </div>
+        </div>
+        <div class="mapa-wrap reveal">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3779.123!2d-97.3963!3d18.4644!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sCalle+36+Norte+601+Tehuac%C3%A1n!5e0!3m2!1ses!2smx!4v1"
+            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade" title="Ubicación">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="footer-brand">
+          <img src="Imágenes/Logo Sport Club.jpg" alt="Sport Club Paseo" />
+          <span>Sport Club <strong>Paseo</strong></span>
+        </div>
+        <p>Activando y transformando vidas en Tehuacán, Puebla desde hace más de 15 años.</p>
+      </div>
+      <div>
+        <h5>Navegación</h5>
+        <ul>
+          <li><a href="#nosotros">El Club</a></li>
+          <li><a href="#instalaciones">Instalaciones</a></li>
+          <li><a href="#membresias">Membresías</a></li>
+          <li><a href="#horarios">Horarios</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contacto</h5>
+        <p>📍 Calle 36 Norte No. 601<br />Col. Ex Hacienda San Lorenzo<br />Tehuacán, Pue.</p>
+        <p>📞 238 380 2328</p>
+        <p>💬 <a href="https://wa.me/5212381870661">238 187 0661</a></p>
+      </div>
+      <div>
+        <h5>Redes Sociales</h5>
+        <div class="footer-social">
+          <a href="https://www.facebook.com/SportClubPaseoTehuacan" target="_blank">↗ Facebook</a>
+          <a href="https://www.instagram.com/sport_club_el_paseo" target="_blank">↗ Instagram</a>
+          <a href="https://twitter.com/SportClubTeh" target="_blank">↗ Twitter</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>© 2024 Sport Club Paseo Tehuacán · Todos los derechos reservados</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WHATSAPP FLOTANTE + POPUP CHAT -->
+  <div class="wa-wrap" id="waWrap">
+
+    <!-- Popup chat -->
+    <div class="wa-popup" id="waPopup">
+      <!-- Header -->
+      <div class="wa-popup-header">
+        <div class="wa-popup-avatar">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </div>
+        <div class="wa-popup-info">
+          <strong>Sport Club Paseo</strong>
+          <span>
+            <span class="wa-online-dot"></span>
+            En línea ahora
+          </span>
+        </div>
+        <button class="wa-popup-close" id="waClose" aria-label="Cerrar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+
+      <!-- Burbuja de mensaje del club -->
+      <div class="wa-popup-body">
+        <div class="wa-bubble">
+          <p>¡Hola! 👋 Bienvenido a <strong>Sport Club Paseo</strong>.</p>
+          <p>¿Te gustaría conocer nuestras membresías, horarios o instalaciones? Escríbenos y te respondemos en minutos.</p>
+          <span class="wa-bubble-time">Hoy</span>
+        </div>
+      </div>
+
+      <!-- Input + enviar -->
+      <div class="wa-popup-footer">
+        <input class="wa-input" id="waInput" type="text" placeholder="Escribe un mensaje..." maxlength="200" />
+        <a class="wa-send" id="waSend" href="#" target="_blank" aria-label="Enviar">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Botón flotante -->
+    <button class="wa-float" id="waBtn" aria-label="Abrir WhatsApp">
+      <span class="wa-ping"></span>
+      <!-- Ícono WA (visible cuando cerrado) -->
+      <span class="wa-icon-open">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      </span>
+      <!-- X (visible cuando abierto) -->
+      <span class="wa-icon-close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </span>
+    </button>
+
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
