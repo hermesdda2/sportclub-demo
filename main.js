@@ -269,56 +269,92 @@ document.querySelectorAll('.plan-card').forEach(card => {
 
 // ── Plans Slider ───────────────────────────────
 (function initPlansSlider() {
-  const track   = document.getElementById('plansTrack');
-  const slider  = document.getElementById('plansSlider');
-  const prevBtn = document.getElementById('planPrev');
-  const nextBtn = document.getElementById('planNext');
-  const dotsWrap = document.getElementById('planDots');
+  const track     = document.getElementById('plansTrack');
+  const slider    = document.getElementById('plansSlider');
+  const prevBtn   = document.getElementById('planPrev');
+  const nextBtn   = document.getElementById('planNext');
+  const mobileNav = document.getElementById('plansMobileNav');
+  const mobPrev   = document.getElementById('planMobPrev');
+  const mobNext   = document.getElementById('planMobNext');
+  const dotsWrap  = document.getElementById('planDots');
+  const dotsDesktop = document.getElementById('planDotsDesktop');
   if (!track) return;
 
   const cards = Array.from(track.querySelectorAll('.plan-card'));
   const total = cards.length;
   let current = 0;
 
-  // Crear dots
-  cards.forEach((_, i) => {
-    const d = document.createElement('button');
-    d.className = 'pdot' + (i === 0 ? ' active' : '');
-    d.addEventListener('click', () => goTo(i));
-    dotsWrap.appendChild(d);
-  });
-  const dots = Array.from(dotsWrap.querySelectorAll('.pdot'));
+  function isMobile() { return window.innerWidth <= 768; }
 
-  function cardWidth() {
-    return cards[0].offsetWidth + 20; // ancho + gap
+  function buildDots(wrap) {
+    wrap.innerHTML = '';
+    cards.forEach((_, i) => {
+      const d = document.createElement('button');
+      d.className = 'pdot' + (i === 0 ? ' active' : '');
+      d.addEventListener('click', () => goTo(i));
+      wrap.appendChild(d);
+    });
   }
 
+  function getAllDots() {
+    return [...document.querySelectorAll('#planDots .pdot, #planDotsDesktop .pdot')];
+  }
+
+  // En mobile: 1 card a la vez. En desktop: lo que cabe.
   function visibleCount() {
-    return Math.floor(slider.offsetWidth / cardWidth());
+    if (isMobile()) return 1;
+    const cw = cards[0].offsetWidth + 20;
+    if (!cw) return 3;
+    return Math.max(1, Math.floor(slider.offsetWidth / cw));
+  }
+
+  // Ancho real de una card + gap
+  function stepWidth() {
+    // Leer el offsetWidth real de la primera card después de que el CSS la haya dimensionado
+    const w = cards[0].offsetWidth;
+    return (w || slider.offsetWidth) + 20;
   }
 
   function goTo(idx) {
-    const maxIdx = total - visibleCount();
+    const maxIdx = Math.max(0, total - visibleCount());
     current = Math.max(0, Math.min(idx, maxIdx));
-    track.style.transform = `translateX(-${current * cardWidth()}px)`;
-    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+    track.style.transform = `translateX(-${current * stepWidth()}px)`;
+    getAllDots().forEach((d, i) => d.classList.toggle('active', i === current));
     prevBtn.disabled = current === 0;
     nextBtn.disabled = current >= maxIdx;
+    if (mobPrev) mobPrev.disabled = current === 0;
+    if (mobNext) mobNext.disabled = current >= maxIdx;
   }
+
+  buildDots(dotsWrap);
+  buildDots(dotsDesktop);
 
   prevBtn.addEventListener('click', () => goTo(current - 1));
   nextBtn.addEventListener('click', () => goTo(current + 1));
+  if (mobPrev) mobPrev.addEventListener('click', () => goTo(current - 1));
+  if (mobNext) mobNext.addEventListener('click', () => goTo(current + 1));
 
   // Swipe táctil
   let startX = 0;
-  track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
-  track.addEventListener('touchend', e => {
+  slider.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+  slider.addEventListener('touchend', e => {
     const dx = e.changedTouches[0].clientX - startX;
     if (Math.abs(dx) > 40) goTo(current + (dx < 0 ? 1 : -1));
   });
 
-  goTo(0);
-  window.addEventListener('resize', () => goTo(current), { passive: true });
+  function updateLayout() {
+    if (isMobile()) {
+      if (mobileNav) mobileNav.style.display = 'flex';
+      if (dotsDesktop) dotsDesktop.style.display = 'none';
+    } else {
+      if (mobileNav) mobileNav.style.display = 'none';
+      if (dotsDesktop) dotsDesktop.style.display = 'flex';
+    }
+    goTo(current);
+  }
+
+  updateLayout();
+  window.addEventListener('resize', updateLayout, { passive: true });
 })();
 
 // ── Slider de Horarios + Tilt 3D + Spotlight ───────────────
@@ -332,18 +368,18 @@ document.querySelectorAll('.plan-card').forEach(card => {
   const GAP = 20;
   let current = 0;
 
-  // Calcula cuántas tarjetas caben (siempre 4 en desktop)
+  function isMobile() { return window.innerWidth <= 768; }
+
+  // En mobile: 1 card visible. En desktop: 4.
   function visibleCount() {
-    const vw = viewport.offsetWidth;
-    const cards = track.querySelectorAll('.hc');
-    if (!cards.length) return 4;
-    const cardW = (vw - GAP * 3) / 4;
-    return Math.max(1, Math.floor(vw / (cardW + GAP)));
+    return isMobile() ? 1 : 4;
   }
 
+  // Ancho de cada card según viewport
   function cardWidth() {
     const vw = viewport.offsetWidth;
-    return (vw - GAP * 3) / 4;
+    const count = visibleCount();
+    return (vw - GAP * (count - 1)) / count;
   }
 
   function setCardWidths() {
@@ -353,7 +389,7 @@ document.querySelectorAll('.plan-card').forEach(card => {
 
   function totalCards() { return track.querySelectorAll('.hc').length; }
 
-  function maxIdx() { return Math.max(0, totalCards() - 4); }
+  function maxIdx() { return Math.max(0, totalCards() - visibleCount()); }
 
   function goTo(idx) {
     current = Math.max(0, Math.min(idx, maxIdx()));
@@ -371,10 +407,10 @@ document.querySelectorAll('.plan-card').forEach(card => {
 
   // Swipe táctil
   let startX = 0;
-  track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
-  track.addEventListener('touchend', e => {
+  viewport.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+  viewport.addEventListener('touchend', e => {
     const dx = e.changedTouches[0].clientX - startX;
-    if (Math.abs(dx) > 50) goTo(current + (dx < 0 ? 1 : -1));
+    if (Math.abs(dx) > 40) goTo(current + (dx < 0 ? 1 : -1));
   });
 
   window.addEventListener('resize', () => { setCardWidths(); goTo(current); }, { passive: true });
@@ -455,4 +491,100 @@ document.querySelectorAll('.plan-card').forEach(card => {
   if (!shown) {
     setTimeout(() => { open(); sessionStorage.setItem('waShown', '1'); }, 4000);
   }
+})();
+
+// ── Mobile Sliders (Values + Instalaciones) ────────────────
+(function initMobileSliders() {
+  function isMobile() { return window.innerWidth <= 768; }
+
+  function buildMobileSlider(opts) {
+    const { track, nav, prevBtn, nextBtn, dotsWrap } = opts;
+    if (!track || !nav) return;
+
+    // El contenedor con overflow:hidden es el padre del track
+    const viewport = track.parentElement;
+
+    const items = Array.from(track.children);
+    const total = items.length;
+    let current = 0;
+
+    // Generar dots
+    dotsWrap.innerHTML = '';
+    items.forEach((_, i) => {
+      const d = document.createElement('button');
+      d.className = 'mob-dot' + (i === 0 ? ' active' : '');
+      d.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(d);
+    });
+    const dots = Array.from(dotsWrap.querySelectorAll('.mob-dot'));
+
+    function cardWidth() {
+      const w = items[0].offsetWidth;
+      return (w || viewport.offsetWidth) + 16;
+    }
+
+    function goTo(idx) {
+      current = Math.max(0, Math.min(idx, total - 1));
+      track.style.transform = `translateX(-${current * cardWidth()}px)`;
+      dots.forEach((d, i) => d.classList.toggle('active', i === current));
+      prevBtn.disabled = current === 0;
+      nextBtn.disabled = current === total - 1;
+    }
+
+    prevBtn.addEventListener('click', () => goTo(current - 1));
+    nextBtn.addEventListener('click', () => goTo(current + 1));
+
+    // Swipe táctil — escuchar en el viewport (overflow:hidden), no en el track
+    let startX = 0;
+    viewport.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+    viewport.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - startX;
+      if (Math.abs(dx) > 40) goTo(current + (dx < 0 ? 1 : -1));
+    });
+
+    window.addEventListener('resize', () => { goTo(current); }, { passive: true });
+
+    goTo(0);
+  }
+
+  function initIfMobile() {
+    // Values
+    const valuesTrack = document.getElementById('valuesTrack');
+    const valuesNav   = document.getElementById('valuesNav');
+    const valuesGrid  = document.getElementById('valuesGrid');
+
+    // Inst
+    const instTrack = document.getElementById('instTrack');
+    const instNav   = document.getElementById('instNav');
+
+    if (isMobile()) {
+      // Mostrar navs
+      if (valuesNav) valuesNav.style.display = 'flex';
+      if (instNav)   instNav.style.display   = 'flex';
+
+      buildMobileSlider({
+        track:    valuesTrack,
+        nav:      valuesNav,
+        prevBtn:  document.getElementById('valuesPrev'),
+        nextBtn:  document.getElementById('valuesNext'),
+        dotsWrap: document.getElementById('valuesDots'),
+      });
+      buildMobileSlider({
+        track:    instTrack,
+        nav:      instNav,
+        prevBtn:  document.getElementById('instPrev'),
+        nextBtn:  document.getElementById('instNext'),
+        dotsWrap: document.getElementById('instDots'),
+      });
+    } else {
+      // Desktop: ocultar navs, resetear transforms
+      if (valuesNav) valuesNav.style.display = 'none';
+      if (instNav)   instNav.style.display   = 'none';
+      if (valuesTrack) valuesTrack.style.transform = '';
+      if (instTrack)   instTrack.style.transform   = '';
+    }
+  }
+
+  initIfMobile();
+  window.addEventListener('resize', initIfMobile, { passive: true });
 })();

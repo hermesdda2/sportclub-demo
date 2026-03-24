@@ -385,6 +385,8 @@ img { max-width: 100%; display: block; }
 
 /* Values 2x2 */
 .values-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.values-track { display: contents; } /* desktop: los hijos se comportan como hijos directos del grid */
+.inst-track   { display: contents; }
 .value-card {
   background: var(--white); border: 1px solid var(--gray-2);
   border-radius: var(--r-lg); padding: 28px 24px;
@@ -494,8 +496,9 @@ img { max-width: 100%; display: block; }
 /* Dots */
 .pslider-dots {
   display: flex; justify-content: center; gap: 8px;
-  margin-bottom: 40px;
+  margin-bottom: 0;
 }
+.pslider-dots-desktop { margin-bottom: 40px; }
 .pdot {
   width: 8px; height: 8px; border-radius: 50%;
   background: var(--gray-2); border: none; cursor: pointer;
@@ -853,9 +856,9 @@ img { max-width: 100%; display: block; }
   pointer-events: all;
 }
 
-/* Header verde */
+/* Header azul */
 .wa-popup-header {
-  background: #075e54;
+  background: var(--blue-d);
   padding: 14px 16px;
   display: flex;
   align-items: center;
@@ -863,7 +866,7 @@ img { max-width: 100%; display: block; }
 }
 .wa-popup-avatar {
   width: 44px; height: 44px;
-  background: #25d366;
+  background: var(--blue);
   border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
@@ -905,7 +908,7 @@ img { max-width: 100%; display: block; }
 }
 .wa-bubble p { font-size: 0.85rem; color: #111; line-height: 1.5; margin-bottom: 4px; }
 .wa-bubble p:last-of-type { margin-bottom: 0; }
-.wa-bubble strong { color: #075e54; }
+.wa-bubble strong { color: var(--blue-d); }
 .wa-bubble-time { display: block; text-align: right; font-size: 0.65rem; color: #999; margin-top: 6px; }
 
 /* Footer input */
@@ -930,31 +933,31 @@ img { max-width: 100%; display: block; }
 }
 .wa-send {
   width: 40px; height: 40px;
-  background: #25d366;
+  background: var(--blue);
   border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
   transition: background 0.2s, transform 0.2s;
 }
-.wa-send:hover { background: #1ebe5b; transform: scale(1.08); }
+.wa-send:hover { background: var(--blue-d); transform: scale(1.08); }
 .wa-send svg { width: 18px; height: 18px; color: #fff; }
 
 /* ── Botón flotante ── */
 .wa-float {
   position: relative;
   width: 60px; height: 60px;
-  background: #25d366;
+  background: var(--blue);
   border-radius: 50%;
   border: none;
   display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 4px 20px rgba(37,211,102,0.5);
+  box-shadow: 0 4px 20px rgba(6,122,192,0.5);
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s;
   animation: waBounce 3s ease-in-out infinite;
   flex-shrink: 0;
 }
-.wa-float.active { background: #075e54; animation: none; }
-.wa-float:hover { transform: scale(1.1); box-shadow: 0 8px 36px rgba(37,211,102,0.7); }
+.wa-float.active { background: var(--blue-dd); animation: none; }
+.wa-float:hover { transform: scale(1.1); box-shadow: 0 8px 36px rgba(6,122,192,0.7); }
 .wa-float.active:hover { transform: scale(1.1); }
 
 /* Iconos dentro del botón */
@@ -975,7 +978,7 @@ img { max-width: 100%; display: block; }
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  background: #25d366;
+  background: var(--blue);
   animation: waPing 2s ease-out infinite;
   opacity: 0;
 }
@@ -1185,17 +1188,126 @@ img { max-width: 100%; display: block; }
   .plans-grid { grid-template-columns: 1fr; }
   .hor-grid { grid-template-columns: 1fr; }
   .hor-wide { grid-column: span 1; }
-  .hc { height: 280px; }
-  .hc-btn { display: none; }
   .footer-grid { grid-template-columns: 1fr; gap: 32px; }
   .mapa-wrap { height: 300px; }
-  .values-grid { grid-template-columns: 1fr; }
   .hero-stats { display: none; }
   .req-bar { flex-direction: column; align-items: flex-start; }
   .gallery-slider { height: 420px; }
   .gslide-content { left: 24px; bottom: 60px; max-width: 85%; }
   .gslider-prev { left: 12px; }
   .gslider-next { right: 12px; }
+
+    /* ── VALUES SLIDER (Quiénes somos) ── */
+  .values-grid {
+    display: block;
+    overflow: hidden;
+    position: relative;
+  }
+  .values-track {
+    display: flex !important;
+    gap: 16px;
+    transition: transform 0.45s cubic-bezier(0.16,1,0.3,1);
+    will-change: transform;
+  }
+  .values-track .value-card {
+    flex-shrink: 0;
+    width: calc(100vw - 80px);
+    max-width: 340px;
+  }
+  .mobile-slider-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 20px;
+  }
+  .mob-arrow {
+    width: 40px; height: 40px; border-radius: 50%;
+    border: 2px solid var(--gray-2);
+    background: var(--white);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: var(--trans);
+    flex-shrink: 0;
+  }
+  .mob-arrow svg { width: 18px; height: 18px; color: var(--dark); }
+  .mob-arrow:hover { border-color: var(--blue); background: var(--blue); }
+  .mob-arrow:hover svg { color: #fff; }
+  .mob-arrow:disabled { opacity: 0.3; pointer-events: none; }
+  .mob-dots { display: flex; gap: 6px; align-items: center; }
+  .mob-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--gray-2); border: none; cursor: pointer;
+    transition: all 0.3s; padding: 0;
+  }
+  .mob-dot.active { background: var(--blue); width: 20px; border-radius: 4px; }
+
+  /* ── INST SLIDER (Instalaciones) ── */
+  .inst-grid {
+    display: block;
+    overflow: hidden;
+    position: relative;
+  }
+  .inst-track {
+    display: flex !important;
+    gap: 16px;
+    transition: transform 0.45s cubic-bezier(0.16,1,0.3,1);
+    will-change: transform;
+  }
+  .inst-track .inst-card {
+    flex-shrink: 0;
+    width: calc(100vw - 80px);
+    max-width: 340px;
+  }
+
+  /* ── PLANS SLIDER mobile fix ── */
+  .plans-slider-wrap {
+    flex-direction: column;
+    gap: 0;
+  }
+  .plans-slider {
+    width: 100%;
+    padding: 16px 0 20px;
+    overflow: hidden;
+  }
+  .plans-track {
+    padding: 0 4px; /* pequeño margen para sombras */
+  }
+  .plan-card {
+    width: calc(100vw - 64px) !important;
+    max-width: 360px;
+  }
+  .pslider-dots-desktop { display: none !important; }
+  .plans-mobile-nav { margin-bottom: 32px; }
+  /* Flechas debajo en mobile */
+  .pslider-btn {
+    display: none;
+  }
+  .plans-mobile-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 8px;
+    margin-bottom: 12px;
+  }
+  .plans-mob-arrow {
+    width: 40px; height: 40px; border-radius: 50%;
+    border: 2px solid var(--gray-2);
+    background: var(--white);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: var(--trans);
+    flex-shrink: 0;
+  }
+  .plans-mob-arrow svg { width: 18px; height: 18px; color: var(--dark); }
+  .plans-mob-arrow:hover { border-color: var(--blue); background: var(--blue); }
+  .plans-mob-arrow:hover svg { color: #fff; }
+  .plans-mob-arrow:disabled { opacity: 0.3; pointer-events: none; }
+
+  /* ── HORARIOS SLIDER mobile fix ── */
+  .hc-btn { display: flex; width: 40px; height: 40px; }
+  .hc { height: 300px; }
+  .hc-btn-prev { margin-right: 10px; }
+  .hc-btn-next { margin-left: 10px; }
 }
 
 @media (max-width: 480px) {
