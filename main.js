@@ -501,6 +501,12 @@ document.querySelectorAll('.plan-card').forEach(card => {
     const { track, nav, prevBtn, nextBtn, dotsWrap } = opts;
     if (!track || !nav) return;
 
+    // Ya inicializado — solo recalcular posición en resize
+    if (track._sliderGoTo) {
+      track._sliderGoTo(track._sliderCurrent || 0);
+      return;
+    }
+
     // El contenedor con overflow:hidden es el padre del track
     const viewport = track.parentElement;
 
@@ -525,12 +531,14 @@ document.querySelectorAll('.plan-card').forEach(card => {
 
     function goTo(idx) {
       current = Math.max(0, Math.min(idx, total - 1));
+      track._sliderCurrent = current;
       track.style.transform = `translateX(-${current * cardWidth()}px)`;
       dots.forEach((d, i) => d.classList.toggle('active', i === current));
       prevBtn.disabled = current === 0;
       nextBtn.disabled = current === total - 1;
     }
 
+    // Registrar listeners solo una vez
     prevBtn.addEventListener('click', () => goTo(current - 1));
     nextBtn.addEventListener('click', () => goTo(current + 1));
 
@@ -544,6 +552,10 @@ document.querySelectorAll('.plan-card').forEach(card => {
 
     window.addEventListener('resize', () => { goTo(current); }, { passive: true });
 
+    // Marcar como inicializado
+    track._sliderGoTo = goTo;
+    track._sliderCurrent = 0;
+
     goTo(0);
   }
 
@@ -551,7 +563,6 @@ document.querySelectorAll('.plan-card').forEach(card => {
     // Values
     const valuesTrack = document.getElementById('valuesTrack');
     const valuesNav   = document.getElementById('valuesNav');
-    const valuesGrid  = document.getElementById('valuesGrid');
 
     // Inst
     const instTrack = document.getElementById('instTrack');
