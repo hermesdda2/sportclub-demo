@@ -1,1 +1,22 @@
-{"name":"Deploy","on":{"push":{"branches":["main"]}},"jobs":{"deploy":{"runs-on":"ubuntu-latest","steps":[{"uses":"actions/checkout@v2"},{"uses":"easingthemes/ssh-deploy@main","with":{"SSH_PRIVATE_KEY":"${{ secrets.SSH_PRIVATE_KEY }}","REMOTE_HOST":"${{ secrets.SSH_HOST }}","REMOTE_USER":"${{ secrets.SSH_USER }}","TARGET":"/home/cp/htdocs/sportclub.hdimpulsodigital.com/","EXCLUDE":"/.git/, /.github/"}}]}}}
+name: Deploy to VPS
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy via rsync
+        uses: burnett01/rsync-deployments@6.0.0
+        with:
+          switches: -avzr --delete --exclude='.github'
+          path: ./
+          remote_path: /home/hdimpulsodigital-sportclub/htdocs/sportclub.hdimpulsodigital.com/
+          remote_host: ${{ secrets.VPS_HOST }}
+          remote_user: ${{ secrets.VPS_USER }}
+          remote_key: ${{ secrets.VPS_SSH_KEY }}
