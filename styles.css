@@ -385,7 +385,9 @@ img { max-width: 100%; display: block; }
 
 /* Values 2x2 */
 .values-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.values-viewport { display: contents; } /* desktop: transparente al grid */
 .values-track { display: contents; } /* desktop: los hijos se comportan como hijos directos del grid */
+.inst-viewport { display: contents; }
 .inst-track   { display: contents; }
 .value-card {
   background: var(--white); border: 1px solid var(--gray-2);
@@ -1200,6 +1202,9 @@ img { max-width: 100%; display: block; }
     /* ── VALUES SLIDER (Quiénes somos) ── */
   .values-grid {
     display: block;
+  }
+  .values-viewport {
+    display: block;
     overflow: hidden;
     position: relative;
   }
@@ -1243,6 +1248,9 @@ img { max-width: 100%; display: block; }
 
   /* ── INST SLIDER (Instalaciones) ── */
   .inst-grid {
+    display: block;
+  }
+  .inst-viewport {
     display: block;
     overflow: hidden;
     position: relative;

@@ -486,11 +486,7 @@ document.querySelectorAll('.plan-card').forEach(card => {
   // Inicializar link con mensaje default
   updateLink();
 
-  // Abrir popup automáticamente después de 4 segundos (solo 1 vez)
-  const shown = sessionStorage.getItem('waShown');
-  if (!shown) {
-    setTimeout(() => { open(); sessionStorage.setItem('waShown', '1'); }, 4000);
-  }
+  // El popup solo se abre con click en el botón, nunca automáticamente
 })();
 
 // ── Mobile Sliders (Values + Instalaciones) ────────────────
