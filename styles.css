@@ -378,9 +378,9 @@ img { max-width: 100%; display: block; }
 /* Two col layout */
 .sec-two-col {
   display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center;
-  overflow: hidden;
+  overflow: hidden; max-width: 100%;
 }
-.sec-two-col > * { min-width: 0; }
+.sec-two-col > * { min-width: 0; max-width: 100%; overflow: hidden; }
 .sec-two-col h2 { font-size: clamp(1.8rem, 2.8vw, 2.4rem); margin-bottom: 16px; }
 .sec-lead { font-size: 1rem; font-weight: 600; color: var(--dark); margin-bottom: 14px; line-height: 1.65; overflow-wrap: break-word; word-wrap: break-word; }
 .sec-body { font-size: 0.9rem; color: var(--gray-4); margin-bottom: 28px; line-height: 1.85; overflow-wrap: break-word; word-wrap: break-word; }
