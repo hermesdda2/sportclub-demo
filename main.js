@@ -491,24 +491,22 @@ document.querySelectorAll('.plan-card').forEach(card => {
 
 // ── Mobile Sliders (Values + Instalaciones) ────────────────
 (function initMobileSliders() {
-  function isMobile() { return window.innerWidth <= 768; }
 
-  function buildMobileSlider(opts) {
-    const { track, nav, prevBtn, nextBtn, dotsWrap } = opts;
-    if (!track || !nav) return;
+  function buildSlider(trackId, prevId, nextId, dotsId, navId) {
+    const track   = document.getElementById(trackId);
+    const prevBtn = document.getElementById(prevId);
+    const nextBtn = document.getElementById(nextId);
+    const dotsWrap = document.getElementById(dotsId);
+    const nav     = document.getElementById(navId);
+    if (!track || !prevBtn || !nextBtn || !dotsWrap || !nav) return;
 
-    // Ya inicializado — solo recalcular posición en resize
-    if (track._sliderGoTo) {
-      track._sliderGoTo(track._sliderCurrent || 0);
-      return;
-    }
-
-    // El contenedor con overflow:hidden es el padre del track
-    const viewport = track.parentElement;
-
+    const viewport = track.parentElement; // values-viewport / inst-viewport
     const items = Array.from(track.children);
     const total = items.length;
     let current = 0;
+
+    // Mostrar nav
+    nav.style.display = 'flex';
 
     // Generar dots
     dotsWrap.innerHTML = '';
@@ -518,27 +516,24 @@ document.querySelectorAll('.plan-card').forEach(card => {
       d.addEventListener('click', () => goTo(i));
       dotsWrap.appendChild(d);
     });
-    const dots = Array.from(dotsWrap.querySelectorAll('.mob-dot'));
+    const dots = Array.from(dotsWrap.children);
 
     function cardWidth() {
-      const w = items[0].offsetWidth;
-      return (w || viewport.offsetWidth) + 16;
+      return items[0].offsetWidth + 16;
     }
 
     function goTo(idx) {
       current = Math.max(0, Math.min(idx, total - 1));
-      track._sliderCurrent = current;
       track.style.transform = `translateX(-${current * cardWidth()}px)`;
       dots.forEach((d, i) => d.classList.toggle('active', i === current));
       prevBtn.disabled = current === 0;
       nextBtn.disabled = current === total - 1;
     }
 
-    // Registrar listeners solo una vez
-    prevBtn.addEventListener('click', () => goTo(current - 1));
-    nextBtn.addEventListener('click', () => goTo(current + 1));
+    prevBtn.onclick = () => goTo(current - 1);
+    nextBtn.onclick = () => goTo(current + 1);
 
-    // Swipe táctil — escuchar en el viewport (overflow:hidden), no en el track
+    // Swipe
     let startX = 0;
     viewport.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
     viewport.addEventListener('touchend', e => {
@@ -546,52 +541,12 @@ document.querySelectorAll('.plan-card').forEach(card => {
       if (Math.abs(dx) > 40) goTo(current + (dx < 0 ? 1 : -1));
     });
 
-    window.addEventListener('resize', () => { goTo(current); }, { passive: true });
-
-    // Marcar como inicializado
-    track._sliderGoTo = goTo;
-    track._sliderCurrent = 0;
-
     goTo(0);
   }
 
-  function initIfMobile() {
-    // Values
-    const valuesTrack = document.getElementById('valuesTrack');
-    const valuesNav   = document.getElementById('valuesNav');
-
-    // Inst
-    const instTrack = document.getElementById('instTrack');
-    const instNav   = document.getElementById('instNav');
-
-    if (isMobile()) {
-      // Mostrar navs
-      if (valuesNav) valuesNav.style.display = 'flex';
-      if (instNav)   instNav.style.display   = 'flex';
-
-      buildMobileSlider({
-        track:    valuesTrack,
-        nav:      valuesNav,
-        prevBtn:  document.getElementById('valuesPrev'),
-        nextBtn:  document.getElementById('valuesNext'),
-        dotsWrap: document.getElementById('valuesDots'),
-      });
-      buildMobileSlider({
-        track:    instTrack,
-        nav:      instNav,
-        prevBtn:  document.getElementById('instPrev'),
-        nextBtn:  document.getElementById('instNext'),
-        dotsWrap: document.getElementById('instDots'),
-      });
-    } else {
-      // Desktop: ocultar navs, resetear transforms
-      if (valuesNav) valuesNav.style.display = 'none';
-      if (instNav)   instNav.style.display   = 'none';
-      if (valuesTrack) valuesTrack.style.transform = '';
-      if (instTrack)   instTrack.style.transform   = '';
-    }
+  // Solo inicializar en mobile — CSS se encarga del resto en desktop
+  if (window.innerWidth <= 768) {
+    buildSlider('valuesTrack', 'valuesPrev', 'valuesNext', 'valuesDots', 'valuesNav');
+    buildSlider('instTrack',   'instPrev',   'instNext',   'instDots',   'instNav');
   }
-
-  initIfMobile();
-  window.addEventListener('resize', initIfMobile, { passive: true });
 })();
