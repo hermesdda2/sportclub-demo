@@ -1141,6 +1141,11 @@ img { max-width: 100%; display: block; }
 }
 
 @media (max-width: 768px) {
+  /* Desactivar efectos hover que quedan pegados en touch */
+  .hc-spotlight { display: none; }
+  .hc::after { display: none; }
+  .hc:hover .hc-spotlight { opacity: 0; }
+
   .nav-links, .btn-nav-contact { display: none; }
   .nav-burger { display: flex; }
   .nav-inner { padding: 0 16px; }
