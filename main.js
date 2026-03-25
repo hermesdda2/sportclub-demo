@@ -496,13 +496,22 @@ if (window.innerWidth > 768) document.querySelectorAll('.plan-card').forEach(car
 
     prevBtn.onclick = () => goTo(current - 1);
     nextBtn.onclick = () => goTo(current + 1);
+    prevBtn.addEventListener('touchend', e => { e.preventDefault(); goTo(current - 1); });
+    nextBtn.addEventListener('touchend', e => { e.preventDefault(); goTo(current + 1); });
 
-    // Swipe
+    // Swipe — solo si el touch no fue en un botón
     let startX = 0;
-    viewport.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+    let startY = 0;
+    viewport.addEventListener('touchstart', e => {
+      if (e.target.closest('.mob-arrow')) return;
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+    }, { passive: true });
     viewport.addEventListener('touchend', e => {
+      if (e.target.closest('.mob-arrow')) return;
       const dx = e.changedTouches[0].clientX - startX;
-      if (Math.abs(dx) > 40) goTo(current + (dx < 0 ? 1 : -1));
+      const dy = e.changedTouches[0].clientY - startY;
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) goTo(current + (dx < 0 ? 1 : -1));
     });
 
     goTo(0);
