@@ -782,8 +782,15 @@ img { max-width: 100%; display: block; }
 .footer-grid ul a:hover { color: var(--cyan); }
 
 .footer-social { display: flex; flex-direction: column; gap: 8px; }
-.footer-social a { font-size: 0.85rem; color: rgba(255,255,255,0.55); transition: color 0.2s; }
-.footer-social a:hover { color: var(--cyan); }
+
+/* Footer social links — desktop: text+icon column */
+.footer-social-link {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 0.85rem; color: rgba(255,255,255,0.55); transition: color 0.2s;
+}
+.footer-social-link:hover { color: var(--cyan); }
+.fsocial-icon { width: 15px; height: 15px; flex-shrink: 0; }
+.fsocial-label { /* visible on desktop */ }
 
 .footer-bottom { padding: 18px 0; text-align: center; background: rgba(0,0,0,0.2); }
 .footer-bottom p { font-size: 0.72rem; color: rgba(255,255,255,0.25); }
@@ -1186,7 +1193,65 @@ img { max-width: 100%; display: block; }
 
   .inst-grid { grid-template-columns: 1fr; }
   .plans-grid { grid-template-columns: 1fr; }
-  .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+  /* ── FOOTER mobile layout ── */
+  /* El grid tiene 4 divs: [brand] [nav] [contacto] [social] */
+  /* En mobile: brand ocupa full ancho, nav+contacto en 2 cols, social full ancho */
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    row-gap: 0;
+  }
+  /* Div 1 (brand): full width, centrado, con borde inferior */
+  .footer-grid > div:nth-child(1) {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    margin-bottom: 24px;
+  }
+  .footer-grid > div:nth-child(1) .footer-brand { justify-content: center; }
+  /* Div 2 (nav): col izquierda, borde derecho como divisor */
+  .footer-grid > div:nth-child(2) {
+    padding-right: 20px;
+    border-right: 1px solid rgba(255,255,255,0.08);
+    padding-bottom: 24px;
+  }
+  /* Div 3 (contacto): col derecha */
+  .footer-grid > div:nth-child(3) {
+    padding-left: 20px;
+    padding-bottom: 24px;
+  }
+  /* Div 4 (social): full width, centrado, borde superior */
+  .footer-grid > div:nth-child(4) {
+    grid-column: 1 / -1;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 24px;
+    text-align: center;
+  }
+  /* Redes sociales: íconos en fila horizontal, centrados */
+  .footer-grid > div:nth-child(4) .footer-social {
+    flex-direction: row;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  /* En mobile mostrar solo el ícono (ocultar el label de texto) */
+  .footer-grid > div:nth-child(4) .fsocial-label { display: none; }
+  /* Ícono como botón circular */
+  .footer-grid > div:nth-child(4) .footer-social-link {
+    width: 42px; height: 42px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.25s, border-color 0.25s, color 0.25s;
+  }
+  .footer-grid > div:nth-child(4) .footer-social-link:hover {
+    background: var(--blue); border-color: var(--blue); color: #fff;
+  }
+  .footer-grid > div:nth-child(4) .fsocial-icon { width: 18px; height: 18px; }
+  /* Título de redes centrado */
+  .footer-grid > div:nth-child(4) h5 { text-align: center; margin-bottom: 14px; }
   .mapa-wrap { height: 300px; }
   .contact-grid { grid-template-columns: 1fr; }
   .req-bar { flex-direction: column; align-items: flex-start; }
