@@ -2,8 +2,6 @@
    SPORT CLUB PASEO — Estilo Fairway / Moderno
    ============================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,700;0,800;0,900;1,300;1,700;1,800;1,900&display=swap');
-
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
@@ -12,7 +10,6 @@
   --blue-dd:   #033b5d;
   --blue-l:    #e8f4fd;
   --cyan:      #2adefd;
-  --green:     #22c55e;  /* accent pill like Fairway */
   --dark:      #111827;
   --dark2:     #1e293b;
   --white:     #ffffff;
@@ -36,7 +33,6 @@ body {
   background: var(--white);
   color: var(--dark);
   line-height: 1.6;
-  overflow-x: hidden;
   overflow-x: clip;
 }
 
@@ -47,7 +43,7 @@ img { max-width: 100%; display: block; }
 ::-webkit-scrollbar-track { background: var(--gray-1); }
 ::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 99px; }
 
-.container { max-width: 1200px; margin: 0 auto; padding: 0 28px; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 28px; width: 100%; box-sizing: border-box; }
 
 /* ── Reveal ── */
 .reveal { opacity:0; transform:translateY(28px); transition: opacity .65s ease, transform .65s ease; }
@@ -708,42 +704,6 @@ img { max-width: 100%; display: block; }
 }
 
 /* ============================================
-   HORARIOS — sección oscura
-   ============================================ */
-.hor-grid {
-  display: grid; grid-template-columns: repeat(4,1fr); gap: 16px;
-}
-
-.hor-card {
-  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
-  border-radius: var(--r-lg); padding: 24px 20px;
-  transition: var(--trans);
-}
-.hor-card:hover { border-color: rgba(6,122,192,0.5); background: rgba(6,122,192,0.08); transform: translateY(-3px); }
-.hor-wide { grid-column: span 2; }
-
-.hor-icon {
-  width: 40px; height: 40px;
-  background: rgba(6,122,192,0.15);
-  border-radius: 10px;
-  display: flex; align-items: center; justify-content: center;
-  margin-bottom: 14px;
-}
-.hor-icon svg { width: 20px; height: 20px; color: var(--cyan); }
-.hor-card h4 {
-  font-size: 0.82rem; font-weight: 700; letter-spacing: 0.06em;
-  text-transform: uppercase; color: #fff; margin-bottom: 14px;
-  padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.08);
-}
-.hor-row {
-  display: flex; justify-content: space-between; gap: 8px;
-  padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 0.78rem;
-}
-.hor-row span { color: rgba(255,255,255,0.4); }
-.hor-row b { color: rgba(255,255,255,0.85); font-weight: 600; text-align: right; }
-.hor-note { margin-top: 10px; font-size: 0.68rem; font-weight: 700; color: var(--cyan); text-transform: uppercase; letter-spacing: 0.06em; }
-
-/* ============================================
    CONTACTO
    ============================================ */
 .contact-grid {
@@ -1140,10 +1100,6 @@ img { max-width: 100%; display: block; }
   flex-direction: column;
   gap: 6px;
 }
-.hc-schedule-row {
-  flex-direction: row;
-  gap: 24px;
-}
 .hc-row {
   display: flex;
   justify-content: space-between;
@@ -1179,8 +1135,6 @@ img { max-width: 100%; display: block; }
   .values-grid { overflow: hidden; }
   .inst-grid { grid-template-columns: repeat(2,1fr); }
   .plans-grid { grid-template-columns: repeat(2,1fr); }
-  .hor-grid { grid-template-columns: repeat(2,1fr); }
-  .hor-wide { grid-column: span 2; }
   .hc-btn { width: 40px; height: 40px; }
   .contact-grid { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: repeat(2,1fr); }
@@ -1202,15 +1156,27 @@ img { max-width: 100%; display: block; }
   .slider-dots { bottom: 24px; }
 
   /* ── SECTION fixes ── */
-  .sec-two-col { grid-template-columns: 1fr !important; gap: 32px; }
-  .sec-two-col > * { min-width: 0 !important; max-width: 100% !important; }
-  .sec-lead, .sec-body { max-width: 100%; word-wrap: break-word; overflow-wrap: break-word; }
-  #nosotros .container { overflow: hidden; }
+  .sec-two-col {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 32px;
+    width: 100%;
+    margin: 0;
+  }
+  .sec-two-col > * { 
+    width: 100% !important; 
+    min-width: 0 !important;
+    overflow: hidden; 
+  }
+  .sec-lead, .sec-body { 
+    width: 100% !important; 
+    word-wrap: break-word !important; 
+    overflow-wrap: break-word !important; 
+    white-space: normal !important;
+  }
+  #nosotros .container { overflow: hidden; width: 100%; }
 
   .inst-grid { grid-template-columns: 1fr; }
   .plans-grid { grid-template-columns: 1fr; }
-  .hor-grid { grid-template-columns: 1fr; }
-  .hor-wide { grid-column: span 1; }
   .footer-grid { grid-template-columns: 1fr; gap: 32px; }
   .mapa-wrap { height: 300px; }
   .contact-grid { grid-template-columns: 1fr; }

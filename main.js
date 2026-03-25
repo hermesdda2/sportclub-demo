@@ -177,15 +177,6 @@ document.querySelectorAll('.plan-card').forEach(card => {
 });
 
 
-// ── Text shimmer en hero title ─────────────────
-(function initShimmer() {
-  const title = document.querySelector('.hero-left h1');
-  if (!title) return;
-  title.style.backgroundImage = 'none'; // reset any prior
-
-  // Subtle ken-burns on slides ya está en CSS, aquí añadimos
-  // number ticker ya hecho arriba
-})();
 
 // ── Gallery Slider ─────────────────────────────
 (function initGallery() {
