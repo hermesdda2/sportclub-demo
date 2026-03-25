@@ -1230,7 +1230,8 @@ img { max-width: 100%; display: block; }
   .mob-arrow svg { width: 18px; height: 18px; color: var(--dark); }
   .mob-arrow:hover { border-color: var(--blue); background: var(--blue); }
   .mob-arrow:hover svg { color: #fff; }
-  .mob-arrow:disabled { opacity: 0.3; pointer-events: none; }
+  .mob-arrow:disabled { opacity: 0.3; }
+  .mob-arrow[disabled] { opacity: 0.3; }
   .mob-dots { display: flex; gap: 6px; align-items: center; }
   .mob-dot {
     width: 7px; height: 7px; border-radius: 50%;

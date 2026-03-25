@@ -490,14 +490,17 @@ if (window.innerWidth > 768) document.querySelectorAll('.plan-card').forEach(car
       current = Math.max(0, Math.min(idx, total - 1));
       track.style.transform = `translateX(-${current * cardWidth()}px)`;
       dots.forEach((d, i) => d.classList.toggle('active', i === current));
-      prevBtn.disabled = current === 0;
-      nextBtn.disabled = current === total - 1;
+      prevBtn.style.opacity = current === 0 ? '0.3' : '1';
+      nextBtn.style.opacity = current === total - 1 ? '0.3' : '1';
     }
 
-    prevBtn.onclick = () => goTo(current - 1);
-    nextBtn.onclick = () => goTo(current + 1);
-    prevBtn.addEventListener('touchend', e => { e.preventDefault(); goTo(current - 1); });
-    nextBtn.addEventListener('touchend', e => { e.preventDefault(); goTo(current + 1); });
+    function prev() { if (current > 0) goTo(current - 1); }
+    function next() { if (current < total - 1) goTo(current + 1); }
+
+    prevBtn.onclick = prev;
+    nextBtn.onclick = next;
+    prevBtn.addEventListener('touchend', e => { e.preventDefault(); e.stopPropagation(); prev(); });
+    nextBtn.addEventListener('touchend', e => { e.preventDefault(); e.stopPropagation(); next(); });
 
     // Swipe — solo si el touch no fue en un botón
     let startX = 0;
