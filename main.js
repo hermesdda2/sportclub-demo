@@ -176,34 +176,6 @@ document.querySelectorAll('.plan-card').forEach(card => {
   card.addEventListener('mouseleave', () => { card.style.transform = ''; });
 });
 
-// ── Smooth cursor glow (efecto 21st.dev) ──────
-(function initCursorGlow() {
-  const glow = document.createElement('div');
-  glow.id = 'cursor-glow';
-  glow.style.cssText = `
-    position:fixed; pointer-events:none; z-index:9999;
-    width:400px; height:400px; border-radius:50%;
-    background: radial-gradient(circle, rgba(6,122,192,0.07) 0%, transparent 70%);
-    transform: translate(-50%,-50%);
-    transition: opacity 0.3s ease;
-    top:0; left:0;
-  `;
-  document.body.appendChild(glow);
-
-  let mx = -500, my = -500;
-  let gx = -500, gy = -500;
-
-  window.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-
-  function animGlow() {
-    gx += (mx - gx) * 0.08;
-    gy += (my - gy) * 0.08;
-    glow.style.left = gx + 'px';
-    glow.style.top  = gy + 'px';
-    requestAnimationFrame(animGlow);
-  }
-  animGlow();
-})();
 
 // ── Text shimmer en hero title ─────────────────
 (function initShimmer() {
