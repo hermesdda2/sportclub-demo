@@ -95,6 +95,7 @@ sections.forEach(s => sectionObs.observe(s));
 (function initParticles() {
   const canvas = document.getElementById('particleCanvas');
   if (!canvas) return;
+  if (window.innerWidth <= 768) { canvas.style.display = 'none'; return; }
   const ctx = canvas.getContext('2d');
   let W, H, particles = [];
 
@@ -166,7 +167,7 @@ const counterObs = new IntersectionObserver(entries => {
 document.querySelectorAll('.hero-stats').forEach(el => counterObs.observe(el));
 
 // ── Tilt 3D en plan cards ─────────────────────
-document.querySelectorAll('.plan-card').forEach(card => {
+if (window.innerWidth > 768) document.querySelectorAll('.plan-card').forEach(card => {
   card.addEventListener('mousemove', e => {
     const r  = card.getBoundingClientRect();
     const x  = (e.clientX - r.left) / r.width  - 0.5;
@@ -380,7 +381,7 @@ document.querySelectorAll('.plan-card').forEach(card => {
 
   // ── Tilt 3D + Spotlight ──────────────────────────
   const MAX_TILT = 10;
-  track.querySelectorAll('[data-tilt]').forEach(card => {
+  if (window.innerWidth > 768) track.querySelectorAll('[data-tilt]').forEach(card => {
     const spotlight = card.querySelector('.hc-spotlight');
 
     card.addEventListener('mousemove', e => {
