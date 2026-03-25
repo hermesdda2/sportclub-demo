@@ -1202,8 +1202,10 @@ img { max-width: 100%; display: block; }
   .slider-dots { bottom: 24px; }
 
   /* ── SECTION fixes ── */
-  .sec-two-col { grid-template-columns: 1fr; gap: 32px; }
+  .sec-two-col { grid-template-columns: 1fr !important; gap: 32px; }
+  .sec-two-col > * { min-width: 0 !important; max-width: 100% !important; }
   .sec-lead, .sec-body { max-width: 100%; word-wrap: break-word; overflow-wrap: break-word; }
+  #nosotros .container { overflow: hidden; }
 
   .inst-grid { grid-template-columns: 1fr; }
   .plans-grid { grid-template-columns: 1fr; }
